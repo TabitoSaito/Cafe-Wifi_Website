@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe and Wifi</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+    <!-- Navbar oben auf der Seite -->
+    <nav class="navbar_own">
+        <a href="{{ url_for('home') }}" class="active">Home</a>
+        <a href="{{ url_for('add') }}">Add</a>
+        <a href="{{ url_for('place', name='random') }}">Random</a>
+    </nav>
+
+    <!-- Linkes Seiten-Div -->
+    <div class="left-sidebar">
+        <h2>Filter</h2>
+        <div class="filter">
+            <a href="{{ url_for('home', filter_command='wifi') }}">
+                <img class="icon" src="static/assets/img/wifi-icon.png">
+                <p class="icon-text">Wifi</p>
+            </a>
+        </div>
+
+        <div class="filter">
+            <a href="{{ url_for('home', filter_command='sockets') }}">
+                <img class="icon" src="static/assets/img/plug-icon.png">
+                <p class="icon-text">Sockets</p>
+            </a>
+        </div>
+
+        <div class="filter">
+            <a href="{{ url_for('home', filter_command='toilet') }}">
+                <img class="icon" src="static/assets/img/toilet-icon.png">
+                <p class="icon-text">toilet</p>
+            </a>
+        </div>
+
+        <div class="filter">
+            <a href="{{ url_for('home', filter_command='calls') }}">
+                <img class="icon" src="static/assets/img/phone-icon.png">
+                <p class="icon-text">takes calls</p>
+            </a>
+        </div>
+        
+    </div>
+
+    <!-- Hauptinhalt der Seite -->
+    <div class="main-content">
+        <h2>{{ cafes_found }} Places found!</h2>
+
+        {% for cafe in cafe_list %}
+
+        <a href="{{ url_for('place', name=cafe.name) }}" class="card">
+            <!-- Bild auf der linken Seite -->
+            <div class="card-image">
+                <img class="card-img" alt="cafe-img" src="{{ cafe.img_url }}">
+            </div>
+            
+            <!-- Textbereich in der Mitte -->
+            <div class="card-content">
+                <p class="bold">{{ cafe.name }}</p>
+                <p>Location: {{ cafe.location }}</p>
+                <p>Seats: {{ cafe.seats }}</p>
+                <p>Price: {{ cafe.coffee_price }}</p>
+            </div>
+
+            <!-- Extra Info in der rechten oberen Ecke -->
+            <div class="extra-info">
+                <p>conveniences: {{ cafe.has_toilet + cafe.has_wifi + cafe.has_sockets + cafe.can_take_calls}}/4</p>
+            </div>
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>

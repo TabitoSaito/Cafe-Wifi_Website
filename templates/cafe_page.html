@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe and Wifi</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar_own">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add') }}">Add</a>
+        <a href="{{ url_for('place', name='random') }}">Random</a>
+    </nav>
+
+    <img class="gradiant" src="{{ cafe.img_url }}">
+    
+    <h1 class="title">{{ cafe.name }}</h1>
+
+    <div class="container">
+
+        <div class="left-part">
+            <p>location: <a href="{{ cafe.map_url }}">{{ cafe.location }}</a></p>
+            <p>seats: {{ cafe.seats }}</p>
+            <p>price: {{ cafe.coffee_price }}</p>
+        </div>
+
+        <div class="right-part">
+            {% if cafe.has_sockets == 1 %}
+            <p>has sockets ✅</p>
+            {% else %}
+            <p>has sockets ❌</p>
+            {% endif %}
+
+            {% if cafe.has_toilet == 1 %}
+            <p>has toilet ✅</p>
+            {% else %}
+            <p>has toilet ❌</p>
+            {% endif %}
+
+            {% if cafe.has_wifi == 1 %}
+            <p>has wifi ✅</p>
+            {% else %}
+            <p>has wifi ❌</p>
+            {% endif %}
+
+            {% if cafe.can_take_calls == 1 %}
+            <p>can take calls ✅</p>
+            {% else %}
+            <p>can take calls ❌</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+</body>
